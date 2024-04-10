@@ -10,7 +10,10 @@ repositories {
 }
 
 dependencies {
-    testImplementation(kotlin("test"))
+    val kotest = "5.8.1"
+    testImplementation("io.kotest:kotest-runner-junit5:$kotest")
+    testImplementation("io.kotest:kotest-assertions-core:$kotest")
+    testImplementation("io.kotest:kotest-property:$kotest")
 }
 
 tasks.test {
