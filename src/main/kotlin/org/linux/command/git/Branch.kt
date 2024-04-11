@@ -1,10 +1,10 @@
 package org.linux.command.org.linux.command.git
 
-data class Branch(val current: String?, val locals: List<String>, val remotes: Map<String, List<String>>) {
+data class Branch(val current: String?, val locals: Set<String>, val remotes: Map<String, Set<String>>) {
     companion object {
-        fun parser(input: String): Branch {
+        fun parser(input: CharSequence): Branch {
             val (remoteLines, localLines) = input
-                .lines()
+                .lineSequence()
                 .map(String::trim)
                 .filter { line -> "HEAD -> " !in line }
                 .partition { line -> line.startsWith("remotes/") }
@@ -12,7 +12,7 @@ data class Branch(val current: String?, val locals: List<String>, val remotes: M
             val (currentBranch, localBranches) = parseLocalLines(localLines)
             val remoteBranches = parseRemoteLines(remoteLines)
 
-            return Branch(current = currentBranch, locals = localBranches, remotes = remoteBranches)
+            return Branch(current = currentBranch, locals = localBranches.toSet(), remotes = remoteBranches)
         }
 
         private fun parseLocalLines(localLines: List<String>): Pair<String?, List<String>> {
@@ -26,8 +26,9 @@ data class Branch(val current: String?, val locals: List<String>, val remotes: M
             return Pair(current, output)
         }
 
-        private fun parseRemoteLines(remotes: List<String>): Map<String, List<String>> =
+        private fun parseRemoteLines(remotes: List<String>): Map<String, Set<String>> =
             remotes.map { line -> line.split("/") }
                 .groupBy(keySelector = { it[1] }, valueTransform = { it.drop(2).joinToString("/") })
+                .mapValues { it.value.toSet() }
     }
 }

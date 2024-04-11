@@ -8,13 +8,12 @@ class BranchTest : FunSpec({
     test("parse") {
         Branch.parser(gitBranchOutput) shouldBe Branch(
             current = "DSS-4861/oracle9",
-            locals = listOf("DSS-4861/oracle9", "develop"),
+            locals = setOf("DSS-4861/oracle9", "develop"),
             remotes = mapOf(
-                "myRepo" to listOf("DSS-4861/oracle9"),
-                "origin" to listOf("develop")
+                "myRepo" to setOf("DSS-4861/oracle9"),
+                "origin" to setOf("develop")
             )
         )
-
     }
 })
 
