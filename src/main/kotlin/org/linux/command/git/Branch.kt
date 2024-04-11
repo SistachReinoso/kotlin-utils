@@ -1,33 +1,33 @@
 package org.linux.command.org.linux.command.git
 
-data class Branch(val current: String?, val localBranches: List<String>, val remotes: Map<String, List<String>>) {
+data class Branch(val current: String?, val locals: List<String>, val remotes: Map<String, List<String>>) {
     companion object {
-        fun of(input: String): Branch {
-            val (remotes, local) = input
+        fun parser(input: String): Branch {
+            val (remoteLines, localLines) = input
                 .lines()
                 .map(String::trim)
+                .filter { line -> "HEAD -> " !in line }
                 .partition { line -> line.startsWith("remotes/") }
 
-            val (current, localBranches) = currentAndLocalBranches(local)
-            val remotesBranches = remotesBranches(remotes)
+            val (currentBranch, localBranches) = parseLocalLines(localLines)
+            val remoteBranches = parseRemoteLines(remoteLines)
 
-            return Branch(current = current, localBranches = localBranches, remotes = remotesBranches)
+            return Branch(current = currentBranch, locals = localBranches, remotes = remoteBranches)
         }
 
-        private fun currentAndLocalBranches(local: List<String>): Pair<String?, List<String>> {
+        private fun parseLocalLines(localLines: List<String>): Pair<String?, List<String>> {
             var current: String? = null
-            val output = local.mapNotNull { line ->
+            val output = localLines.mapNotNull { line ->
                 if (line.startsWith("* ")) {
-                    current = line.drop(2); return@mapNotNull current
-                }
-
-                line
+                    current = line.drop(2)
+                    current
+                } else line
             }
             return Pair(current, output)
         }
 
-        private fun remotesBranches(remotes: List<String>): Map<String, List<String>> =
+        private fun parseRemoteLines(remotes: List<String>): Map<String, List<String>> =
             remotes.map { line -> line.split("/") }
-                .groupBy(keySelector = { it[1] }, valueTransform = { it.drop(2).joinToString() })
+                .groupBy(keySelector = { it[1] }, valueTransform = { it.drop(2).joinToString("/") })
     }
 }

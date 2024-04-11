@@ -5,11 +5,10 @@ import io.kotest.matchers.shouldBe
 import org.linux.command.org.linux.command.git.Branch
 
 class BranchTest : FunSpec({
-    test("wiii") {
-        val branch = Branch.of(wiii)
-        branch shouldBe Branch(
+    test("parse") {
+        Branch.parser(gitBranchOutput) shouldBe Branch(
             current = "DSS-4861/oracle9",
-            localBranches = listOf("DSS-4861/oracle9", "develop"),
+            locals = listOf("DSS-4861/oracle9", "develop"),
             remotes = mapOf(
                 "myRepo" to listOf("DSS-4861/oracle9"),
                 "origin" to listOf("develop")
@@ -19,7 +18,7 @@ class BranchTest : FunSpec({
     }
 })
 
-val wiii = """
+val gitBranchOutput = """
 * DSS-4861/oracle9
   develop
   remotes/myRepo/DSS-4861/oracle9
