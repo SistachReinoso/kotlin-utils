@@ -15,6 +15,10 @@ class BranchTest : FunSpec({
             )
         )
     }
+
+    test("example") {
+        Branch.done()
+    }
 })
 
 val gitBranchOutput = """
