@@ -1,27 +1,16 @@
 plugins {
-    application
-    kotlin("jvm") version "1.9.23"
+    kotlin("jvm") version "1.9.23" apply false
 }
 
 group = "org.linux.command"
-version = "1.0-SNAPSHOT"
+version = "0.2.0-SNAPSHOT"
 
-repositories {
-    mavenCentral()
-}
+subprojects {
+    repositories {
+        mavenCentral()
+    }
 
-dependencies {
-    implementation(libs.click)
-    testImplementation(libs.bundles.kotest)
-}
-
-tasks.test {
-    useJUnitPlatform()
-}
-kotlin {
-    jvmToolchain(11)
-}
-
-application {
-    mainClass = "org.linux.command.org.linux.command.MainKt"
+    tasks.withType<Test> {
+        useJUnitPlatform()
+    }
 }
