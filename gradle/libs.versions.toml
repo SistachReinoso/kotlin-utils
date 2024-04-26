@@ -1,0 +1,12 @@
+[versions]
+click = "4.3.0"
+kotest = "5.8.1"
+
+[libraries]
+click = { module = "com.github.ajalt.clikt:clikt", version.ref = "click" }
+kotest-core = { module = "io.kotest:kotest-assertions-core", version.ref = "kotest" }
+kotest-runner = { module = "io.kotest:kotest-runner-junit5", version.ref = "kotest" }
+kotest-properties = { module = "io.kotest:kotest-property", version.ref = "kotest" }
+
+[bundles]
+kotest = ["kotest-core", "kotest-runner", "kotest-properties"]

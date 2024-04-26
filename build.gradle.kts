@@ -11,11 +11,8 @@ repositories {
 }
 
 dependencies {
-    implementation("com.github.ajalt.clikt:clikt:4.3.0")
-    val kotest = "5.8.1"
-    testImplementation("io.kotest:kotest-runner-junit5:$kotest")
-    testImplementation("io.kotest:kotest-assertions-core:$kotest")
-    testImplementation("io.kotest:kotest-property:$kotest")
+    implementation(libs.click)
+    testImplementation(libs.bundles.kotest)
 }
 
 tasks.test {
