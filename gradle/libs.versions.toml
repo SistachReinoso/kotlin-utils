@@ -1,6 +1,7 @@
 [versions]
 click = "4.3.0"
 kotest = "5.8.1"
+versions = "0.51.0"
 
 [libraries]
 click = { module = "com.github.ajalt.clikt:clikt", version.ref = "click" }
@@ -10,3 +11,6 @@ kotest-properties = { module = "io.kotest:kotest-property", version.ref = "kotes
 
 [bundles]
 kotest = ["kotest-core", "kotest-runner", "kotest-properties"]
+
+[plugins]
+versions = { id = "com.github.ben-manes.versions", version.ref = "versions" }
