@@ -4,9 +4,10 @@ plugins {
 }
 
 dependencies {
+    implementation(project(":command-lib"))
     implementation(libs.click)
 }
 
 application {
-    mainClass = "org.linux.command.org.linux.command.MainKt"
+    mainClass = "org.linux.command.MainKt"
 }

@@ -1,4 +1,4 @@
-package org.linux.command.org.linux.command
+package org.linux.command
 
 import com.github.ajalt.clikt.core.CliktCommand
 import org.linux.command.org.linux.command.git.Branch

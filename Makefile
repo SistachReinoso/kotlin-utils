@@ -1,21 +1,24 @@
+.PHONY: help \
+	build \
+	installDist \
+	tasks \
+	clean
+
 help:
 	@echo "help             Show this help"
 	@echo "build            Assembles and tests this project."
-	@echo "tasks            Show all tasks"
 	@echo "installDist      Generate command"
-
-.PHONY: \
-	help \
-	build \
-	tasks \
-
+	@echo "tasks            Show all tasks"
+	@echo "clean            Clean the project"
 
 build:
 	./gradlew build
 
 installDist:
 	./gradlew installDist
-	@echo $(shell realpath build/install/command/bin/command)
 
 tasks:
 	./gradlew tasks --all
+
+clean:
+	./gradlew clean
