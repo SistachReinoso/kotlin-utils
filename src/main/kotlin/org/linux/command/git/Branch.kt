@@ -1,6 +1,5 @@
 package org.linux.command.org.linux.command.git
 
-import java.io.File
 import java.util.concurrent.TimeUnit
 
 data class Branch(val current: String?, val locals: Set<String>, val remotes: Map<String, Set<String>>) {
@@ -31,7 +30,7 @@ data class Branch(val current: String?, val locals: Set<String>, val remotes: Ma
             return Branch(current = currentBranch, locals = localBranches.toSet(), remotes = remoteBranches)
         }
 
-        private fun parseLocalLines(localLines: List<String>): Pair<String?, List<String>> {
+        private fun parseLocalLines(localLines: Collection<String>): Pair<String?, List<String>> {
             var current: String? = null
             val output = localLines.mapNotNull { line ->
                 if (line.startsWith("* ")) {
