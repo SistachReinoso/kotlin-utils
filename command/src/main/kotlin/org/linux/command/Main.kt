@@ -1,11 +1,19 @@
 package org.linux.command
 
+import com.github.ajalt.clikt.completion.completionOption
 import com.github.ajalt.clikt.core.CliktCommand
-import org.linux.command.org.linux.command.git.Branch
+import com.github.ajalt.clikt.core.subcommands
+import org.linux.command.git.GitCommand
+import org.linux.command.update.UpdateCommand
 
-class MyCommand: CliktCommand() {
+class MyCommand : CliktCommand(name = "myCommand") {
+    init {
+        completionOption()
+        subcommands(GitCommand())
+        subcommands(UpdateCommand())
+    }
+
     override fun run() {
-        echo(Branch.done())
     }
 }
 

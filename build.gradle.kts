@@ -21,7 +21,7 @@ subprojects {
 // https://github.com/ben-manes/gradle-versions-plugin
 tasks.withType<DependencyUpdatesTask> {
     rejectVersionIf {
-        isNonStable(candidate.version) && !isNonStable(currentVersion)
+        isNonStable(candidate.version)
     }
 }
 

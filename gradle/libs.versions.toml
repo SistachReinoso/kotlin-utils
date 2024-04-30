@@ -1,5 +1,5 @@
 [versions]
-click = "4.3.0"
+click = "4.4.0"
 kotest = "5.8.1"
 versions = "0.51.0"
 
