@@ -3,11 +3,12 @@ package org.linux.command.update
 import com.github.ajalt.clikt.core.CliktCommand
 import com.github.ajalt.clikt.parameters.options.option
 import com.github.ajalt.clikt.parameters.options.prompt
+import com.github.ajalt.clikt.parameters.options.required
 
-class UpdateCommand: CliktCommand() {
+class UpdateCommand : CliktCommand() {
     private val password by option().prompt(hideInput = true)
+    private val name by option(envvar = "USERNAME").required()
     override fun run() {
-        echo("your password is $password")
-        echo("ups, that normally is a secret")
+        update()
     }
 }

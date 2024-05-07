@@ -4,7 +4,7 @@ plugins {
 }
 
 dependencies {
-    implementation(libs.click)
+    implementation(libs.coroutine)
     testImplementation(libs.bundles.kotest)
 }
 
